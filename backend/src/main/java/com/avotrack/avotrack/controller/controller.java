@@ -18,7 +18,7 @@ public class controller {
     }
 
     @GetMapping(value="/aircrafts/pos", produces = "application/json")
-    public @ResponseBody String getAircraftPosition(@RequestParam String flightIDcd) {
+    public @ResponseBody String getAircraftPosition(@RequestParam String flightID) {
         return "here are all aircraft positions";
     }
 }

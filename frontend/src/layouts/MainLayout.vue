@@ -6,16 +6,15 @@
           flat
           dense
           round
-          icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
-        />
+        >
+          <q-icon size="32px" class="text-accent las la-plane-departure"/>
+        </q-btn>
 
         <q-toolbar-title>
-          Quasar App
+          AeroTrack
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -115,3 +114,5 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss">
+</style>

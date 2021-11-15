@@ -1,16 +1,14 @@
 package com.avotrack.avotrack.models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 public class Position {
     private Double lat;
     private Double lon;
-    private JsonNode alt;
+    private String alt;
 
     public Position() {
     }
 
-    public Position(Double lat, Double lon, JsonNode alt) {
+    public Position(Double lat, Double lon, String alt) {
         this.lat = lat;
         this.lon = lon;
         this.alt = alt;
@@ -32,11 +30,11 @@ public class Position {
         this.lon = lon;
     }
 
-    public JsonNode getAlt() {
+    public String getAlt() {
         return alt;
     }
 
-    public void setAlt(JsonNode alt) {
+    public void setAlt(String alt) {
         this.alt = alt;
     }
 }

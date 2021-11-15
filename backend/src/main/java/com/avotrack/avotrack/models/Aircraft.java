@@ -1,9 +1,6 @@
 package com.avotrack.avotrack.models;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Aircraft {
     private String hex;
     private Integer lastSeen;
@@ -97,5 +94,17 @@ public class Aircraft {
         } else if (!hex.toLowerCase().equals(other.hex.toLowerCase()))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Aircraft{" +
+                "hex='" + hex + '\'' +
+                ", lastSeen=" + lastSeen +
+                ", position=" + position +
+                ", flight=" + flight +
+                ", aircraftInfo=" + aircraftInfo +
+                ", trail=" + trail +
+                '}';
     }
 }

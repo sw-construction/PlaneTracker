@@ -1,5 +1,7 @@
 <template>
-  <div ref="olmap" id="map"></div>
+  <div ref="olmap" id="map">
+    <RightSidebar />
+  </div>
 </template>
 
 <script>
@@ -9,7 +11,11 @@ import OSM from "ol/source/OSM";
 import "ol/ol.css";
 
 import TileLayer from "ol/layer/Tile";
+import RightSidebar from "../../components/RightSidebar/Rightsidebar.vue";
 export default {
+  components: {
+    RightSidebar,
+  },
   setup() {
     let olmap = ref(null);
 

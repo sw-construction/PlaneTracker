@@ -13,7 +13,7 @@ public class AircraftService {
 
     // check if aircraft was old aircraft if so then remove it from old_aircrafts and reset last seen
     public void processAircraft(List<Aircraft> aircrafts) {
-
+        System.out.println(aircrafts);
     }
 
     // adds or updates each newly added aircraft from temp_aircrafts

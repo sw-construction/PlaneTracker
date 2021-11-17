@@ -54,10 +54,9 @@ public class AircraftService {
 
         for (Aircraft aircraft : Global.aircrafts) {
             int lastSeen = aircraft.getLastSeen();
-
-            aircraft.setLastSeen(lastSeen++);
-
+            aircraft.setLastSeen(aircraft.getLastSeen()+1);
             if (!temp_aircrafts.contains(aircraft)) {
+                System.out.println(aircraft);
                 if (aircraft.getLastSeen() > 45) {
                     aircraftsToBeRemoved.add(aircraft);
                     old_aircrafts.add(aircraft);

@@ -1,6 +1,8 @@
 import { boot } from "quasar/wrappers";
 import Map from "ol/Map";
 import View from "ol/View";
+import VectorSource from "ol/source/Vector";
+import * as olProj from "ol/proj";
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -11,11 +13,14 @@ import View from "ol/View";
 
 const map = new Map({
   view: new View({
-    center: [-106.43431, 31.00322],
+    projection: "EPSG:3857",
+    center: olProj.transform([-106.485, 31.7619], "EPSG:4326", "EPSG:3857"),
     zoom: 11,
     layers: [],
   }),
 });
+
+const planeSource = new VectorSource();
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -28,4 +33,4 @@ export default boot(({ app }) => {
   //       so you can easily perform requests against your app's API
 });
 
-export { map };
+export { map, planeSource };

@@ -1,15 +1,23 @@
 package com.avotrack.avotrack.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.avotrack.avotrack.models.Aircraft;
+import com.avotrack.avotrack.services.AircraftService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class controller {
+
+    @Autowired
+    AircraftService aircraftService;
+    // cross origin allows any host with the url below to make a request
+    @CrossOrigin(origins = "*")
     @GetMapping(value="/aircrafts", produces = "application/json")
-    public @ResponseBody String getAircraft() {
-        return "here are your aircrafts";
+    public @ResponseBody
+    List<Aircraft> getAircraft() {
+        return aircraftService.getAircrafts();
     }
 
     @GetMapping(value="/aircrafts/positons", produces = "application/json")

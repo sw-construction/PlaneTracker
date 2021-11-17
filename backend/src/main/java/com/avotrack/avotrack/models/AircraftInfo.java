@@ -87,4 +87,18 @@ public class AircraftInfo {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "AircraftInfo{" +
+                "icao='" + icao + '\'' +
+                ", registration='" + registration + '\'' +
+                ", photo_url='" + photo_url + '\'' +
+                ", photo_source='" + photo_source + '\'' +
+                ", photo_author='" + photo_author + '\'' +
+                ", callsign='" + callsign + '\'' +
+                ", type='" + type + '\'' +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }

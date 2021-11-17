@@ -2,6 +2,8 @@ package com.avotrack.avotrack.models;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import java.util.Objects;
+
 public class Position {
     private Double lat;
     private Double lon;
@@ -38,6 +40,28 @@ public class Position {
 
     public void setAlt(JsonNode alt) {
         this.alt = alt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return lat.equals(position.lat) && lon.equals(position.lon);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lat, lon);
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "lat=" + lat +
+                ", lon=" + lon +
+                ", alt='" + alt + '\'' +
+                '}';
     }
 }
 

@@ -1,22 +1,25 @@
 package com.avotrack.avotrack.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Aircraft {
     private String hex;
-    private Integer lastSeen;
+    private Integer lastSeen = 0;
     private Position position;
     private Flight flight;
     private AircraftInfo aircraftInfo;
-    private Trail trail;
+    @JsonIgnore
+    private List<Position> trail;
 
 
     public Aircraft() {
     }
 
-    public Aircraft(String hex, Integer lastSeen, Position position, Flight flight, AircraftInfo aircraftInfo, Trail trail) {
+    public Aircraft(String hex, Integer lastSeen, Position position, Flight flight, AircraftInfo aircraftInfo, List<Position> trail) {
         this.hex = hex;
         this.lastSeen = lastSeen;
         this.position = position;
@@ -65,12 +68,27 @@ public class Aircraft {
         this.aircraftInfo = aircraftInfo;
     }
 
-    public Trail getTrail() {
+    public List<Position> getTrail() {
         return trail;
     }
 
-    public void setTrail(Trail trail) {
+    public void setTrail(List<Position> trail) {
         this.trail = trail;
+    }
+
+    public void addToTrailPositions(Position position) {
+        if(this.trail == null) {
+            this.trail = new ArrayList<>();
+        }
+        if(this.trail.size() == 0) {
+            this.trail.add(position);
+        }
+        if(this.trail.size() > 0) {
+            Position prevPos = this.trail.get(this.trail.size() -1);
+            if(prevPos != position) {
+                this.trail.add(position);
+            }
+        }
     }
 
     @Override
@@ -97,5 +115,17 @@ public class Aircraft {
         } else if (!hex.toLowerCase().equals(other.hex.toLowerCase()))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Aircraft{" +
+                "hex='" + hex + '\'' +
+                ", lastSeen=" + lastSeen +
+                ", position=" + position +
+                ", flight=" + flight +
+                ", aircraftInfo=" + aircraftInfo +
+                ", trail=" + trail +
+                '}';
     }
 }

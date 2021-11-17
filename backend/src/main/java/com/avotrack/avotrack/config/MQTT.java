@@ -1,5 +1,10 @@
 package com.avotrack.avotrack.config;
 
+import com.avotrack.avotrack.models.Aircraft;
+import com.avotrack.avotrack.services.AircraftService;
+import com.avotrack.avotrack.services.PayloadParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -7,14 +12,17 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.core.MessageProducer;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Configuration
 public class MQTT {
+
+    private PayloadParser parser = new PayloadParser();
 
     @Bean
     public MessageChannel mqttInputChannel () {
@@ -35,7 +43,15 @@ public class MQTT {
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
         return message -> {
-            System.out.println(message.getPayload());
+            JSONArray planeData = new JSONArray(message.getPayload().toString());
+            List<Aircraft> new_aircrafts = new ArrayList<>();
+
+            for(int i =0; i<planeData.length(); i++) {
+                JSONObject plane = planeData.getJSONObject(i);
+                new_aircrafts.add(parser.createAircraft(plane));
+            }
+            AircraftService aircraftService = new AircraftService();
+            aircraftService.processAircraft(new_aircrafts);
         };
     }
 }

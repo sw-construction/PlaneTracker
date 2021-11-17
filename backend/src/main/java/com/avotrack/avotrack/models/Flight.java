@@ -233,4 +233,35 @@ public class Flight {
     public void setRssi(Double rssi) {
         this.rssi = rssi;
     }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "barometric_alt='" + barometric_alt + '\'' +
+                ", geometric_alt='" + geometric_alt + '\'' +
+                ", ground_speed=" + ground_speed +
+                ", track=" + track +
+                ", barometric_rate=" + barometric_rate +
+                ", squawk=" + squawk +
+                ", emergency='" + emergency + '\'' +
+                ", nav_qnh=" + nav_qnh +
+                ", nav_altitude_mcp='" + nav_altitude_mcp + '\'' +
+                ", heading=" + heading +
+                ", modes=" + modes +
+                ", nic=" + nic +
+                ", rc=" + rc +
+                ", version=" + version +
+                ", nic_baro=" + nic_baro +
+                ", nac_p=" + nac_p +
+                ", nac_v=" + nac_v +
+                ", sil=" + sil +
+                ", sil_type='" + sil_type + '\'' +
+                ", gva=" + gva +
+                ", sda=" + sda +
+                ", alert=" + alert +
+                ", mlat='" + mlat + '\'' +
+                ", tisb='" + tisb + '\'' +
+                ", rssi=" + rssi +
+                '}';
+    }
 }

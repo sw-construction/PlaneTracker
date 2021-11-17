@@ -4,6 +4,9 @@ import com.avotrack.avotrack.models.Aircraft;
 import com.avotrack.avotrack.models.AircraftInfo;
 import com.avotrack.avotrack.models.Flight;
 import com.avotrack.avotrack.models.Position;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,22 +19,41 @@ public class PayloadParser {
     public Aircraft createAircraft(JSONObject plane){
         Aircraft aircraft = new Aircraft();
         aircraft.setHex(plane.getString("hex"));
-        aircraft.setPosition(createPosition(plane));
+        try {
+            aircraft.setPosition(createPosition(plane));
+        } catch (Exception e) {
+
+        }
+
         aircraft.setFlight(createFlight(plane));
         aircraft.setAircraftInfo(createAircraftInfo(plane));
         return aircraft;
     }
 
-    public Position createPosition(JSONObject plane) throws JSONException {
+    public Position createPosition(JSONObject plane) throws JSONException, JsonProcessingException {
         Position position = new Position();
-        if(plane.has("lat")){
-            position.setLat(plane.getDouble("lat"));
+        String jsonString = plane.toString();
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode obj = mapper.readTree(jsonString);
+        if(obj.has("lat") && obj.hasNonNull("lat")) {
+            position.setLat(obj.get("lat").asDouble(0));
+        } else {
+            position.setLat(0.0);
         }
-        if(plane.has("lon")){
-            position.setLon(plane.getDouble("lon"));
+        if(obj.has("lon") && obj.hasNonNull("lon")) {
+            position.setLon(obj.get("lon").asDouble(0));
+        } else {
+            position.setLon(0.0);
         }
-        if(plane.has("alt_geom")){
-            position.setAlt(plane.get("alt_geom").toString());
+
+        if(obj.has("alt_baro") && obj.hasNonNull("alt_baro")) {
+            position.setAlt(obj.get("alt_baro"));
+        }
+        else if(obj.has("alt_geom") && obj.hasNonNull("alt_geom")) {
+            position.setAlt(obj.get("alt_geom"));
+        }
+        else if(obj.has("nav_altitude_mcp") && obj.hasNonNull("nav_altitude_mcp")) {
+            position.setAlt(obj.get("nav_altitude_mcp"));
         }
         return position;
     }

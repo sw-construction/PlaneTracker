@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1641b788-5677-4189-85fe-13006ad216e3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/RightSideBar/AircraftTable/AircraftTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RightSideBar/AircraftTable/AircraftTable.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +48,8 @@
       <workItem from="1636925437224" duration="88000" />
       <workItem from="1636925540757" duration="43000" />
       <workItem from="1636925642249" duration="58000" />
+      <workItem from="1637029464881" duration="2818000" />
+      <workItem from="1637210197033" duration="1805000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,7 @@
 package com.avotrack.avotrack.models;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 public class AircraftInfo {
     private String icao;
     private String registration;
@@ -9,6 +11,7 @@ public class AircraftInfo {
     private String callsign;
     private String type;
     private String category;
+    private JsonNode photo;
 
     public AircraftInfo() {
     }
@@ -86,6 +89,14 @@ public class AircraftInfo {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public JsonNode getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(JsonNode photo) {
+        this.photo = photo;
     }
 
     @Override

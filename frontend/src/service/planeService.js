@@ -47,6 +47,8 @@ const processData = (aircrafts) => {
       let ac = aircrafts[i];
       aircraft = Object.assign(new Aircraft(), ac);
       aircraft.createFeature();
+      aircraft.createTrail();
+      aircraft.getAircraftPhoto();
       planes.value.push(aircraft);
     }
 

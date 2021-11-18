@@ -2,15 +2,21 @@
   <div id="content">
     <div id="tab-label">
       <q-icon class="q-mr-sm" size="md" name="settings"> </q-icon>
-      <label>Aircraft List</label>
+      <label>Aircraft Feed</label>
       <q-btn flat icon="close" size="lg" @click="close" />
     </div>
     <div id="tab-content">
       <div class="row">
-        <q-card class="map-card bg-secondary text-white" flat square>
-          <q-card-section>
-            <div class="row">ADD YOUR STUFF HERE</div>
-          </q-card-section>
+        <q-card class="map-card bg-primary text-white" flat square>
+          <div class="row">
+            <div class="col">
+              <FeedCard
+                v-for="(aircraft, index) in planeStore.state.planes"
+                :key="index"
+                v-bind="aircraft"
+              />
+            </div>
+          </div>
         </q-card>
       </div>
     </div>
@@ -20,8 +26,13 @@
 </template>
 
 <script>
+import FeedCard from "./FeedCard.vue";
+import planeStore from "src/planeStore";
+import { ref } from "vue";
 export default {
-  components: {},
+  components: {
+    FeedCard,
+  },
   setup(props, { emit }) {
     const mapStyles = [];
     const close = () => {
@@ -29,6 +40,7 @@ export default {
     };
 
     return {
+      planeStore,
       close,
     };
   },
@@ -37,7 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .tabs {
-  background-color: aqua;
+  background-color: $primary;
 }
 
 #content > #tab-label > label {
@@ -49,7 +61,8 @@ export default {
 
 #tab-content {
   height: 100%;
-  background-color: $secondary;
+  background-color: $primary;
+  overflow-y: auto;
 }
 
 .map-card {

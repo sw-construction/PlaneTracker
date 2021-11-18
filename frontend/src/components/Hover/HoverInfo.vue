@@ -4,8 +4,8 @@
     id="smallInfoBox"
     :style="{ top: posStyle.top + 'px', left: posStyle.left + 'px' }"
   >
-    <v-card class="hover-info-card bg-primary">
-      <v-card-section>
+    <q-card class="hover-info-card bg-primary">
+      <q-card-section>
         <div class="q-pa-sm">
           <div class="text-h6">
             {{ aircraft.aircraftInfo.callsign }}
@@ -35,8 +35,8 @@
             <label> {{ aircraft.lastSeen }} </label>
           </div>
         </div>
-      </v-card-section>
-    </v-card>
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 

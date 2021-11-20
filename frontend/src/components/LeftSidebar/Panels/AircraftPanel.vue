@@ -13,7 +13,7 @@
             <q-btn flat round color="accent" icon="close" @click="close" />
           </q-card-actions>
         </q-item>
-        <img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+        <q-img width="360px" height="240px" :src="aircraft.photo.photo_url" />
 
         <q-item class="q-px-none q-pb-none">
           <q-item-section>
@@ -225,9 +225,10 @@ export default {
     aircraft: Object,
   },
 
-  setup() {
+  setup(props) {
     const close = () => {
       planeStore.state.showAircraftPanel = false;
+      console.log(props.aircraft)
     };
 
     return {

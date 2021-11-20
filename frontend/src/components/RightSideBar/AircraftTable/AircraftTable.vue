@@ -7,7 +7,7 @@
     </div>
     <div id="tab-content">
       <div class="row">
-        <q-card class="map-card bg-secondary text-white" flat square>
+        <q-card class="map-card bg-primary text-white" flat square>
           <q-card-section>
             <div class="row">ADD YOUR STUFF HERE</div>
           </q-card-section>
@@ -49,7 +49,7 @@ export default {
 
 #tab-content {
   height: 100%;
-  background-color: $secondary;
+  background-color: $primary;
 }
 
 .map-card {

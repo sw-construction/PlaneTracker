@@ -1,6 +1,8 @@
 import { createFeature, createIcon } from "../utils/featureCreator";
-import { planeSource } from "src/boot/ol";
-import { api } from "src/boot/axios";
+import { createTrail } from "../utils/trailCreator";
+import { planeSource, trailSource } from "src/boot/ol";
+
+import axios, { api } from "src/boot/axios";
 
 import Point from "ol/geom/Point";
 import * as olProj from "ol/proj";
@@ -15,10 +17,29 @@ export default class Aircraft {
   }
 
   feature = null;
+  trail = null;
+  photo = {
+    photo_url: require("../assets/plane_image_holder.jpg"),
+  };
 
   createFeature() {
     this.feature = createFeature(this);
     planeSource.addFeature(this.feature);
+  }
+
+  async createTrail() {
+    await api
+      .get("/aircrafts/aircraft/trail", {
+        params: {
+          icao: this.hex,
+        },
+      })
+      .then((response) => {
+        this.trail = createTrail(response.data);
+        this.trail.visible = true;
+
+        // trailSource.addFeature(this.trail);
+      });
   }
 
   updateFeature() {
@@ -35,6 +56,31 @@ export default class Aircraft {
       new Point(olProj.fromLonLat([this.position.lon, this.position.lat]))
     );
   }
+
+  async getAircraftPhoto() {
+    await api
+      .get("/aircrafts/aircraft/photo", {
+        params: {
+          icao: this.hex,
+        },
+      })
+      .then((response) => {
+        let photo = response.data;
+        if (
+          photo.photo_url != undefined &&
+          photo.photo_url != "No Photos found" &&
+          photo.photo_url != "error"
+        ) {
+          this.photo = photo;
+        } else {
+          this.photo = {
+            photo_url: require("../assets/plane_image_holder.jpg"),
+          };
+        }
+      });
+  }
+
+  getAircraftReg() {}
 
   updateAircraft(aircraft) {
     this.hex = aircraft.hex;

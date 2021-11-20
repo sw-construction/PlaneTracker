@@ -3,6 +3,7 @@ package com.avotrack.avotrack.config;
 import com.avotrack.avotrack.models.Aircraft;
 import com.avotrack.avotrack.services.AircraftService;
 import com.avotrack.avotrack.services.PayloadParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Bean;
@@ -48,7 +49,11 @@ public class MQTT {
 
             for(int i =0; i<planeData.length(); i++) {
                 JSONObject plane = planeData.getJSONObject(i);
-                new_aircrafts.add(parser.createAircraft(plane));
+                try {
+                    new_aircrafts.add(parser.createAircraft(plane));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
             }
             AircraftService aircraftService = new AircraftService();
             aircraftService.processAircraft(new_aircrafts);

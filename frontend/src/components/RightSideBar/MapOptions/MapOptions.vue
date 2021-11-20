@@ -7,7 +7,7 @@
     </div>
     <div id="tab-content">
       <div class="row">
-        <q-card class="map-card bg-secondary text-white" flat square>
+        <q-card class="map-card bg-primary text-white" flat square>
           <q-card-section>
             <div class="row">
               <div class="text-h6">Base Maps</div>
@@ -16,16 +16,18 @@
           </q-card-section>
         </q-card>
 
-        <q-card class="map-card bg-secondary text-white" flat square>
+        <q-card class="map-card bg-primary text-white" flat square>
           <q-card-section>
             <div class="row">
+              <div class="text-h6">Map Overlays</div>
               <!-- <MapOverlayList /> -->
             </div>
           </q-card-section>
         </q-card>
-        <q-card class="map-card bg-secondary text-white" flat square>
+        <q-card class="map-card bg-primary text-white" flat square>
           <q-card-section>
             <div class="row">
+              <div class="text-h6">Aircraft Settings</div>
               <!-- <AircraftSettings /> -->
             </div>
           </q-card-section>
@@ -74,7 +76,7 @@ export default {
 
 #tab-content {
   height: 100%;
-  background-color: $secondary;
+  background-color: $primary;
 }
 
 .map-card {

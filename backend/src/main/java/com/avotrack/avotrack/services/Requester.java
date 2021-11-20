@@ -15,8 +15,12 @@ public class Requester {
                 URL url = new URL(requestUrl);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
+                if(conn.getResponseCode() == 400) {
+                    return null;
+                }
                 in = new BufferedInputStream(conn.getInputStream());
                 response = convertStreamToString(in);
+
 //                System.out.println(response);
             }
         } catch (Exception e) {

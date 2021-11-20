@@ -10,13 +10,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class PayloadParser {
 
-    public Aircraft createAircraft(JSONObject plane){
+
+
+    public Aircraft createAircraft(JSONObject plane) throws JsonProcessingException {
         Aircraft aircraft = new Aircraft();
         aircraft.setHex(plane.getString("hex"));
         try {
@@ -138,9 +145,24 @@ public class PayloadParser {
         return flight;
     }
 
-    public AircraftInfo createAircraftInfo(JSONObject plane) {
+    public AircraftInfo createAircraftInfo(JSONObject plane) throws JsonProcessingException {
+
+
         AircraftInfo aircraftInfo = new AircraftInfo();
-        aircraftInfo.setIcao(plane.getString("hex"));
+//        aircraftInfo.setIcao(plane.getString("hex"));
+//        String hex = plane.getString("hex");
+//
+////        System.out.println(photoService.getPhoto(hex));
+//        aircraftInfo.setPhoto(photoService.getPhoto(hex));
+//        JsonNode extraACData = registrationService.getAircraftData(hex);
+//        if(extraACData != null) {
+//            if (extraACData.has("registraction") && extraACData.hasNonNull("registraction")) {
+//                aircraftInfo.setRegistration(extraACData.get("registraction").asText());
+//            }
+//        }
+
+
+
         if(plane.has("flight")){
             aircraftInfo.setCallsign(plane.getString("flight"));
         }

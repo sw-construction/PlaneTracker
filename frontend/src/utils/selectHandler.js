@@ -1,7 +1,17 @@
+import Select from "ol/interaction/Select";
+import { click } from "ol/events/condition";
 import { map } from "boot/ol";
-let select = null;
+import planeStore from "src/planeStore"
+import { getPlaneFromPlanes } from "../service/planeService";
 
+let select = null;
 let selectedAC = null;
+
+// map click select
+const selectClick = new Select({
+  condition: click,
+  style: false,
+});
 
 export const addSelectClick = () => {
   select = selectClick;
@@ -16,6 +26,10 @@ export const addSelectClick = () => {
 
     if (hex) {
       // TODO: add handlers to open panel
+      let aircraft = getPlaneFromPlanes(hex);
+      planeStore.state.aircraft = aircraft;
+      console.log(aircraft)
+      planeStore.state.showAircraftPanel = true;
     }
   });
 };

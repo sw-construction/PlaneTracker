@@ -1,6 +1,6 @@
 <template>
   <div ref="olmap" id="map">
-    <LeftSidebar/>
+    <LeftSidebar />
     <RightSidebar />
     <HoverInfo
       v-if="showHoverInfo"
@@ -19,6 +19,7 @@ import HoverInfo from "../../components/Hover/HoverInfo.vue";
 import planeStore from "src/planeStore";
 import "ol/ol.css";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar.vue"
+import { addSelectClick } from "../../utils/selectHandler.js";
 
 export default {
   components: {
@@ -34,9 +35,11 @@ export default {
     let posStyle = ref(null);
     let topValue = ref(null);
     let leftValue = ref(null);
+    let aircraft = ref(null);
 
     const createMap = () => {
       map.setTarget(olmap.value);
+      addSelectClick();
     };
 
     const startFetch = () => {

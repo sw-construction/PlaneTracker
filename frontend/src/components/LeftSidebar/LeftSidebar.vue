@@ -1,7 +1,10 @@
 <template>
   <div class="leftsidebar-container">
     <div class="left-sidebar">
-      <AircraftPanel/>
+      <AircraftPanel
+        v-if="planeStore.state.showAircraftPanel"
+        :aircraft="planeStore.state.aircraft"
+      />
     </div>
   </div>
 </template>
@@ -9,15 +12,16 @@
 <script>
 import { inject, ref, onMounted, computed } from "vue";
 import AircraftPanel from "./Panels/AircraftPanel.vue";
-import { useStore } from "vuex";
+import planeStore from "src/planeStore";
 
 export default {
-   components: {
-     AircraftPanel,
-   },
+  components: {
+    AircraftPanel,
+  },
   setup() {
 
     return {
+      planeStore,
     };
   },
 };

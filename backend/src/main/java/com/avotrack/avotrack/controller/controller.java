@@ -1,5 +1,9 @@
 package com.avotrack.avotrack.controller;
 
+import com.avotrack.avotrack.db.AircraftInfoRepo;
+import com.avotrack.avotrack.db.AircraftRepo;
+import com.avotrack.avotrack.db.FlightRepo;
+import com.avotrack.avotrack.db.PositionRepo;
 import com.avotrack.avotrack.models.Aircraft;
 import com.avotrack.avotrack.models.Position;
 import com.avotrack.avotrack.services.AircraftService;
@@ -27,6 +31,19 @@ public class controller {
 
     @Autowired
     TrailService trailService;
+
+
+    @Autowired
+    AircraftRepo aircraftRepo;
+
+    @Autowired
+    FlightRepo flightRepo;
+
+    @Autowired
+    PositionRepo positionRepo;
+
+    @Autowired
+    AircraftInfoRepo aircraftInfoRepo;
 
 
 
@@ -58,6 +75,21 @@ public class controller {
     @GetMapping(value = "/aircrafts/trails")
     public  @ResponseBody
     List<List<Position>> getAllTrails() { return trailService.getAllTrails(); }
+
+
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/aircrafts/db/all")
+    public  @ResponseBody
+    List<Aircraft> getAircraftsInDb() { return aircraftRepo.findAll(); }
+
+//    @CrossOrigin(origins = "*")
+//    @GetMapping(value = "/aircrafts/db")
+//    public  @ResponseBody
+//    List<Aircraft> getAircraftsInDb() { return aircraftRepo.findAll(); }
+
+
+
 
 
 }

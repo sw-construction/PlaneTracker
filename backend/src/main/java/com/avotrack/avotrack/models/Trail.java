@@ -1,10 +1,18 @@
 package com.avotrack.avotrack.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Trail {
+
+    private Long id;
     private List<Position> trail;
+
+    @ManyToOne
+    @JoinColumn(name="aircraft_flightID")
+    private Aircraft aircraft;
 
     public Trail() {
     }

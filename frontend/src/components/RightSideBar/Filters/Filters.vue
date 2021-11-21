@@ -46,6 +46,10 @@ export default {
   text-transform: uppercase;
   white-space: nowrap;
 }
+#tab-label {
+  background-color: $accent;
+  color: white;
+}
 
 #tab-content {
   height: 100%;

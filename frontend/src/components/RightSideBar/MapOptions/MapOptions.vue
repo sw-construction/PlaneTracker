@@ -78,6 +78,10 @@ export default {
   height: 100%;
   background-color: $primary;
 }
+#tab-label {
+  background-color: $accent;
+  color: white;
+}
 
 .map-card {
   width: 100%;

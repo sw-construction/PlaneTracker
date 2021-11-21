@@ -4,9 +4,9 @@
       <q-card square class="gt-xs aircraft-card">
         <q-item class="aircraft-header">
           <q-item-section>
-            <q-item-label class="text-h6" v-if="aircraft.hex">{{
-              aircraft.hex
-            }}</q-item-label>
+            <q-item-label class="text-h6" v-if="aircraft.hex"
+              >ICAO: {{ aircraft.hex }}</q-item-label
+            >
             <q-item-label class="text-h6" v-else>N/A</q-item-label>
           </q-item-section>
           <q-card-actions>
@@ -14,6 +14,14 @@
           </q-card-actions>
         </q-item>
         <q-img width="360px" height="240px" :src="aircraft.photo.photo_url" />
+        <div v-if="aircraft.photo.photo_link">
+          <a
+            :href="aircraft.photo.photo_link"
+            target="_blank"
+            style="text-decoration: none !important; color: white"
+            >Link to photo</a
+          >
+        </div>
 
         <q-item class="q-px-none q-pb-none">
           <q-item-section>
@@ -39,8 +47,10 @@
                   <div class="text-h6">Registration</div>
                   <q-item-label
                     class="text-subtitle2"
-                    v-if="aircraft.aircraftInfo.registration"
-                    >{{ aircraft.aircraftInfo.registration }}</q-item-label
+                    v-if="aircraft.aircraftData"
+                    >{{
+                      aircraft.aircraftData.registrationNumber
+                    }}</q-item-label
                   >
                   <q-item-label class="text-subtitle2" v-else>N/A</q-item-label>
                 </div>
@@ -426,6 +436,8 @@ export default {
   setup(props) {
     const close = () => {
       planeStore.state.showAircraftPanel = false;
+      planeStore.state.aircraft = null;
+      planeStore.state.selectedAircraft = [];
       console.log(props.aircraft);
     };
 

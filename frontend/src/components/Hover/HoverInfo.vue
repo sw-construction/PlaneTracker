@@ -6,7 +6,7 @@
   >
     <q-card class="hover-info-card bg-primary">
       <q-card-section>
-        <div class="q-pa-sm">
+        <div class="">
           <div class="text-h6">
             {{ aircraft.aircraftInfo.callsign }}
           </div>
@@ -14,21 +14,25 @@
             {{ aircraft.aircraftInfo.icao }}
           </div>
           <q-separator color="accent" />
-          <div class="text-subtitle1">
+          <div v-if="aircraft.aircraftData" class="text-subtitle1">
+            Reg:
+            <label> {{ aircraft.aircraftData.registrationNumber }} </label>
+          </div>
+          <div v-else class="text-subtitle1">
             Reg:
             <label> N/A </label>
           </div>
           <div class="text-subtitle1">
             Altitude:
-            <label> N/A </label>
+            <label> {{ aircraft.position.alt }} </label>
           </div>
           <div class="text-subtitle1">
             Speed:
-            <label> N/A </label>
+            <label> {{ aircraft.flight.ground_speed }} knt (s) </label>
           </div>
           <div class="text-subtitle1">
             Source:
-            <label> N/A </label>
+            <label> {{ aircraft.aircraftInfo.type }} </label>
           </div>
           <div class="text-subtitle1">
             lastSeen:

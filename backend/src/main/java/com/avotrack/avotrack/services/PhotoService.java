@@ -17,6 +17,9 @@ public class PhotoService {
         Requester requester = new Requester();
         String url = PHOTO_URL+icao;
         String result = requester.makeRequest(url);
+        if(result == null) {
+            return null;
+        }
         ObjectMapper mapper = new ObjectMapper();
         JsonNode photoObj = mapper.readTree(result);
         return photoObj;

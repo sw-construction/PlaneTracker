@@ -2,7 +2,13 @@ package com.avotrack.avotrack.models;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import javax.persistence.*;
+
+@Entity
 public class AircraftInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  Long id;
     private String icao;
     private String registration;
     private String photo_url;
@@ -11,7 +17,13 @@ public class AircraftInfo {
     private String callsign;
     private String type;
     private String category;
+
+    @Transient
     private JsonNode photo;
+
+//    @ManyToOne
+//    @JoinColumn(name="aircraft_flightID")
+//    private Aircraft aircraft;
 
     public AircraftInfo() {
     }
@@ -26,6 +38,16 @@ public class AircraftInfo {
         this.type = type;
         this.category = category;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
 
     public String getIcao() {
         return icao;

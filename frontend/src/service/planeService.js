@@ -49,13 +49,14 @@ const processData = (aircrafts) => {
       aircraft.createFeature();
       aircraft.createTrail();
       aircraft.getAircraftPhoto();
+      aircraft.getAircraftReg();
       planes.value.push(aircraft);
     }
 
     if (aircraft) {
       aircraft.updateAircraft(aircrafts[i]);
       // we will update trail here
-      //   aircraft.updateTrail();
+      aircraft.updateTrail();
 
       // updates it position
       aircraft.updateFeature();

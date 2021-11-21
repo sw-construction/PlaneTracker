@@ -1,11 +1,14 @@
 package com.avotrack.avotrack.config;
 
+import com.avotrack.avotrack.Global;
 import com.avotrack.avotrack.models.Aircraft;
 import com.avotrack.avotrack.services.AircraftService;
+import com.avotrack.avotrack.services.InsertDb;
 import com.avotrack.avotrack.services.PayloadParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -15,15 +18,26 @@ import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannel
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 
 @Configuration
 public class MQTT {
 
     private PayloadParser parser = new PayloadParser();
+
+
+
+    @Autowired
+    AircraftService aircraftService;
+
+    @Autowired
+    InsertDb insertDb;
 
     @Bean
     public MessageChannel mqttInputChannel () {
@@ -55,7 +69,8 @@ public class MQTT {
                     e.printStackTrace();
                 }
             }
-            AircraftService aircraftService = new AircraftService();
+
+
             aircraftService.processAircraft(new_aircrafts);
         };
     }

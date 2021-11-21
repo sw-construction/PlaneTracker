@@ -1,9 +1,14 @@
 package com.avotrack.avotrack.models;
 
+import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
 
+@Entity
 public class Flight {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  Long id;
     private String barometric_alt;
     private  String geometric_alt;
     private Double ground_speed;
@@ -14,6 +19,10 @@ public class Flight {
     private Double nav_qnh;
     private String nav_altitude_mcp;
     private Double heading;
+
+    private Long updatedAt = Instant.now().getEpochSecond();
+
+    @Transient
     private List<String> modes;
     private Integer nic;
     private Integer rc;
@@ -30,8 +39,28 @@ public class Flight {
     private String tisb;
     private Double rssi;
 
+//    @ManyToOne
+//    @JoinColumn(name="aircraft_flightID")
+//    private Aircraft aircraft;
+
     public Flight () {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getBarometric_alt() {

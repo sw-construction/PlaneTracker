@@ -3,17 +3,48 @@ package com.avotrack.avotrack.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+@Entity
 public class Aircraft {
+    @Id
+    private String flightID = UUID.randomUUID().toString();
     private String hex;
     private Integer lastSeen = 0;
+
+
+    @Transient
     private Position position;
+
+    @Transient
     private Flight flight;
+
+    @Transient
     private AircraftInfo aircraftInfo;
-    @JsonIgnore
-    private List<Position> trail;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "aircraft_info_id", referencedColumnName = "id")
+
+
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn( name = "flightID", referencedColumnName = "flightID")
+    @Transient
+    private List<Position> trail = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn( name = "flightID", referencedColumnName = "flightID")
+//    private List<Flight> flights = new ArrayList<>();
+
+
+
+
+    private Long flightStart = Instant.now().getEpochSecond();
+
 
 
     public Aircraft() {
@@ -27,6 +58,33 @@ public class Aircraft {
         this.aircraftInfo = aircraftInfo;
         this.trail = trail;
     }
+
+//    public List<Flight> getFlights() {
+//        return flights;
+//    }
+//
+//    public void setFlights(List<Flight> flights) {
+//        this.flights = flights;
+//    }
+
+
+
+    public String getFlightID() {
+        return flightID;
+    }
+
+    public void setFlightID(String flightID) {
+        this.flightID = flightID;
+    }
+
+    public Long getFlightStart() {
+        return flightStart;
+    }
+
+    public void setFlightStart(Long flightStart) {
+        this.flightStart = flightStart;
+    }
+
 
     public String getHex() {
         return hex;

@@ -15,12 +15,14 @@ export default class Aircraft {
     this.flight = flight;
     this.aircraftInfo = aircraftInfo;
   }
-
+  selected = null;
   feature = null;
   trail = null;
   photo = {
     photo_url: require("../assets/plane_image_holder.jpg"),
   };
+
+  aircraftData = null;
 
   createFeature() {
     this.feature = createFeature(this);
@@ -36,7 +38,6 @@ export default class Aircraft {
       })
       .then((response) => {
         this.trail = createTrail(response.data);
-        this.trail.visible = true;
 
         // trailSource.addFeature(this.trail);
       });
@@ -55,6 +56,24 @@ export default class Aircraft {
     this.feature.setGeometry(
       new Point(olProj.fromLonLat([this.position.lon, this.position.lat]))
     );
+  }
+
+  updateTrail() {
+    let nextCoord = olProj.fromLonLat([this.position.lon, this.position.lat]);
+    if (this.trail) {
+      this.trail.getGeometry().appendCoordinate(nextCoord);
+    }
+  }
+
+  toggleTrail() {
+    if (this.trail) {
+      if (this.selected) {
+        console.log("dsa");
+        this.trail.visible = true;
+      } else {
+        this.trail.visible = false;
+      }
+    }
   }
 
   async getAircraftPhoto() {
@@ -80,7 +99,22 @@ export default class Aircraft {
       });
   }
 
-  getAircraftReg() {}
+  async getAircraftReg() {
+    await api
+      .get("/aircrafts/aircraft/reg", {
+        params: {
+          icao: this.hex,
+        },
+      })
+      .then((response) => {
+        let aircraftData = response.data;
+        if (aircraftData.registrationNumber) {
+          this.aircraftData = aircraftData;
+        } else {
+          this.aircraftData = null;
+        }
+      });
+  }
 
   updateAircraft(aircraft) {
     this.hex = aircraft.hex;

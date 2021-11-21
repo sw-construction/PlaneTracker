@@ -59,6 +59,11 @@ export default {
   white-space: nowrap;
 }
 
+#tab-label {
+  background-color: $accent;
+  color: white;
+}
+
 #tab-content {
   height: 100%;
   background-color: $primary;

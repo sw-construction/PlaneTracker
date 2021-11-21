@@ -2,12 +2,24 @@ package com.avotrack.avotrack.models;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Position {
+    @Id
+    @GeneratedValue
+    private  Long id;
     private Double lat;
     private Double lon;
+    private String altitude;
+    @Transient
     private JsonNode alt;
+
+
+//    @ManyToOne
+//    @JoinColumn(name="aircraft_flightID")
+//    private Aircraft aircraft;
 
     public Position() {
     }
@@ -16,6 +28,14 @@ public class Position {
         this.lat = lat;
         this.lon = lon;
         this.alt = alt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getLat() {

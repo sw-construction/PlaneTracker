@@ -5,7 +5,7 @@
       <label>Aircraft Table</label>
       <q-btn flat icon="close" size="lg" @click="close" />
     </div>
-    <div id="tab-content ">
+    <div id="tab-content" style="overflow: auto">
       <q-table
         square
         class="my-sticky-header-table aircraft-table"
@@ -14,7 +14,9 @@
         :columns="columns"
         row-key="hex"
         selection="single"
-        v-model:selected="selected"
+        @row-click="rowSelect"
+        @update:selected="tableSelection"
+        v-model:selected.sync="planeStore.state.selectedAircraft"
         virtual-scroll
         :rows-per-page-options="[0]"
         dark
@@ -29,10 +31,21 @@
 <script>
 import planeStore from "src/planeStore";
 import { ref } from "vue";
+import { aircraftSelection } from "src/utils/selectHandler";
 export default {
   components: {},
   setup(props, { emit }) {
-    const onAircraftSelect = () => {};
+    const tableSelection = (selection) => {
+      if (selection[0]) {
+        aircraftSelection(selection[0].hex, true);
+      } else {
+        aircraftSelection(null, false);
+      }
+    };
+    const rowSelect = (evt, row, index) => {
+      planeStore.state.selectedAircraft[0] = row;
+      aircraftSelection(row.hex, true);
+    };
     let selected = ref([]);
     const close = () => {
       emit("closeTest");
@@ -51,7 +64,7 @@ export default {
         required: true,
         label: "ICAO",
         align: "left",
-        field: (row) => row.aircraftInfo.icao,
+        field: (row) => row.hex,
         sortable: false,
       },
       {
@@ -75,7 +88,7 @@ export default {
         required: true,
         label: "Alt",
         align: "left",
-        field: (row) => row.flight.geometric_alt,
+        field: (row) => row.position.alt,
         sortable: false,
       },
     ];
@@ -84,6 +97,8 @@ export default {
       planeStore,
       close,
       selected,
+      tableSelection,
+      rowSelect,
     };
   },
 };
@@ -102,12 +117,13 @@ export default {
 }
 
 #tab-label {
-  background-color: $primary;
+  background-color: $accent;
   color: white;
 }
 #tab-content {
   height: 100%;
   background-color: $primary;
+  overflow: auto !important;
 }
 
 .map-card {
@@ -119,14 +135,27 @@ export default {
 
 
 .my-sticky-header-table
-  height:  100%
+
+
 
 
   background-color: $primary
 
+  .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th
+    /* bg color is important for th; just specify one */
+    background-color: $primary
+
   tbody tr
     &:hover
       background-color: $accent
+
+  tbody tr
+    &.selected
+      background-color: $accent
+
+
 
   thead tr th
     position: sticky

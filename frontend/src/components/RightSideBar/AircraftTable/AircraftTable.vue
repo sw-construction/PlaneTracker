@@ -1,5 +1,3 @@
-import planeStore from "src/planeStore";
-
 <template>
   <div id="content">
     <div id="tab-label">
@@ -7,19 +5,21 @@ import planeStore from "src/planeStore";
       <label>Aircraft Table</label>
       <q-btn flat icon="close" size="lg" @click="close" />
     </div>
-    <div id="tab-content">
-    <q-table
-            class="my-sticky-header-table"
-                      title="Aircrafts"
-                      :rows="planeStore.state.planes"
-                      :columns="columns"
-                      row-key="icao"
-                      virtual-scroll
-                      v-model:pagination="pagination"
-                      :rows-per-page-options="[0]"
-                      dark
-                      dense
-          />
+    <div id="tab-content ">
+      <q-table
+        square
+        class="my-sticky-header-table aircraft-table"
+        title="Aircrafts"
+        :rows="planeStore.state.planes"
+        :columns="columns"
+        row-key="hex"
+        selection="single"
+        v-model:selected="selected"
+        virtual-scroll
+        :rows-per-page-options="[0]"
+        dark
+        dense
+      />
     </div>
     <br />
     <br />
@@ -28,24 +28,62 @@ import planeStore from "src/planeStore";
 
 <script>
 import planeStore from "src/planeStore";
+import { ref } from "vue";
 export default {
   components: {},
   setup(props, { emit }) {
-    const mapStyles = [];
+    const onAircraftSelect = () => {};
+    let selected = ref([]);
     const close = () => {
       emit("closeTest");
     };
     const columns = [
-                            { name: 'fn', required: true, label: 'Flight Name', align: 'left', field: row => row.aircraftInfo.callsign, sortable: false },
-                            { name: 'icao', required: true, label: 'ICAO', align: 'left', field: row => row.aircraftInfo.icao, sortable: false },
-                            { name: 'type', required: true, label: 'Type', align: 'left', field: row => row.aircraftInfo.type, sortable: false },
-                            { name: 'speed', required: true, label: 'Speed', align: 'left', field: row => row.flight.ground_speed, sortable: false },
-                            { name: 'alt', required: true, label: 'Alt', align: 'left', field: row => row.flight.geometric_alt, sortable: false },
-                          ];
+      {
+        name: "fn",
+        required: true,
+        label: "Flight Name",
+        align: "left",
+        field: (row) => row.aircraftInfo.callsign,
+        sortable: false,
+      },
+      {
+        name: "icao",
+        required: true,
+        label: "ICAO",
+        align: "left",
+        field: (row) => row.aircraftInfo.icao,
+        sortable: false,
+      },
+      {
+        name: "type",
+        required: true,
+        label: "Type",
+        align: "left",
+        field: (row) => row.aircraftInfo.type,
+        sortable: false,
+      },
+      {
+        name: "speed",
+        required: true,
+        label: "Speed",
+        align: "left",
+        field: (row) => row.flight.ground_speed,
+        sortable: false,
+      },
+      {
+        name: "alt",
+        required: true,
+        label: "Alt",
+        align: "left",
+        field: (row) => row.flight.geometric_alt,
+        sortable: false,
+      },
+    ];
     return {
       columns,
       planeStore,
       close,
+      selected,
     };
   },
 };
@@ -63,25 +101,32 @@ export default {
   white-space: nowrap;
 }
 
+#tab-label {
+  background-color: $primary;
+  color: white;
+}
 #tab-content {
   height: 100%;
-  background-color: $secondary;
+  background-color: $primary;
 }
 
 .map-card {
   width: 100%;
 }
-
 </style>
 
 <style lang="sass">
-.my-sticky-header-table
-  height: 870px
 
-  .q-table__top,
-  .q-table__bottom,
-  thead tr:first-child th
-    background-color: #000
+
+.my-sticky-header-table
+  height:  100%
+
+
+  background-color: $primary
+
+  tbody tr
+    &:hover
+      background-color: $accent
 
   thead tr th
     position: sticky

@@ -284,7 +284,7 @@ export default {
   align-items: center;
   padding: 0px 20px;
   height: 60px;
-  background-color: $secondary;
+
   border-bottom: 1px solid rgb(195, 197, 197);
 }
 

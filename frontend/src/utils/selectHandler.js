@@ -31,5 +31,8 @@ export const addSelectClick = () => {
       console.log(aircraft)
       planeStore.state.showAircraftPanel = true;
     }
+    else {
+      planeStore.state.showAircraftPanel = false;
+    }
   });
 };

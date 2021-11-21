@@ -152,59 +152,62 @@
           <div class="row m-data-row content-center">
             <div class="col-5 m-data-col">
               <div class="q-body-2">ICAO</div>
-              <div v-if="aircraft.hex" class="text-caption text-color-main">
+              <div v-if="aircraft.hex" class="text-caption ">
                 {{ aircraft.hex }}
               </div>
-              <div v-else class="q-body-2 text-color-main">N/A</div>
+              <div v-else class="q-body-2 ">N/A</div>
             </div>
 
             <div class="col-5 m-data-col">
               <div class="q-body-2">Registration</div>
               <div
                 v-if="aircraft.aircraftInfo.registration"
-                class="text-caption text-color-main"
+                class="text-caption "
               >
                 {{ aircraft.aircraftInfo.registration }}
               </div>
-              <div v-else class="text-caption text-color-main">N/A</div>
+              <div v-else class="text-caption ">N/A</div>
             </div>
 
             <div class="col-5 m-data-col">
               <div class="q-body-2">Aircraft Type</div>
-              <div v-if="aircraft.aircraftInfo.type" class="text-caption text-color-main">
+              <div v-if="aircraft.aircraftInfo.type" class="text-caption ">
                 {{ aircraft.aircraftInfo.type }}
               </div>
-              <div v-else class="text-caption text-color-main">N/A</div>
+              <div v-else class="text-caption ">N/A</div>
             </div>
 
             <div class="col-5 m-data-col">
               <div class="q-body-2">Heading</div>
-              <div v-if="aircraft.track" class="text-caption text-color-main">
-                {{ aircraft.track }}
+              <div v-if="aircraft.flight.heading" class="text-caption ">
+                {{ aircraft.flight.heading }}
               </div>
-              <div v-else class="text-caption text-color-main">N/A</div>
+              <div v-if="aircraft.flight.track" class="text-caption ">
+                {{ aircraft.flight.track }}
+              </div>
+              <div v-else class="text-caption ">N/A</div>
             </div>
 
             <div class="col-5 m-data-col">
               <div class="q-body-2">Longitude</div>
               <div
                 v-if="aircraft.position.lon"
-                class="text-caption text-color-main"
+                class="text-caption "
               >
                 {{ aircraft.position.lon }}
               </div>
-              <div v-else class="text-caption text-color-main">N/A</div>
+              <div v-else class="text-caption ">N/A</div>
             </div>
 
             <div class="col-5 m-data-col">
               <div class="q-body-2">Latitude</div>
               <div
                 v-if="aircraft.position.lat"
-                class="text-caption text-color-main"
+                class="text-caption "
               >
                 {{ aircraft.position.lat }}
               </div>
-              <div v-else class="text-caption text-color-main">N/A</div>
+              <div v-else class="text-caption ">N/A</div>
             </div>
           </div>
         </q-card-section>
@@ -324,9 +327,5 @@ export default {
       color: white;
     }
   }
-}
-
-.m-text-color-main {
-  color: #a28345;
 }
 </style>

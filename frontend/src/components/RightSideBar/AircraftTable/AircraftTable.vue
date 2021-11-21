@@ -1,3 +1,5 @@
+import planeStore from "src/planeStore";
+
 <template>
   <div id="content">
     <div id="tab-label">
@@ -6,15 +8,18 @@
       <q-btn flat icon="close" size="lg" @click="close" />
     </div>
     <div id="tab-content">
-            <q-table
-                            title="Aircrafts"
-                            :data="planes"
-                            :columns="columns"
-                            row-key="name"
-                            hide-bottom
-                            dark
-                    >
-                    </q-table>
+    <q-table
+            class="my-sticky-header-table"
+                      title="Aircrafts"
+                      :rows="planeStore.state.planes"
+                      :columns="columns"
+                      row-key="icao"
+                      virtual-scroll
+                      v-model:pagination="pagination"
+                      :rows-per-page-options="[0]"
+                      dark
+                      dense
+          />
     </div>
     <br />
     <br />
@@ -30,21 +35,18 @@ export default {
     const close = () => {
       emit("closeTest");
     };
+    const columns = [
+                            { name: 'fn', required: true, label: 'Flight Name', align: 'left', field: row => row.aircraftInfo.callsign, sortable: false },
+                            { name: 'icao', required: true, label: 'ICAO', align: 'left', field: row => row.aircraftInfo.icao, sortable: false },
+                            { name: 'type', required: true, label: 'Type', align: 'left', field: row => row.aircraftInfo.type, sortable: false },
+                            { name: 'speed', required: true, label: 'Speed', align: 'left', field: row => row.flight.ground_speed, sortable: false },
+                            { name: 'alt', required: true, label: 'Alt', align: 'left', field: row => row.flight.geometric_alt, sortable: false },
+                          ];
     return {
+      columns,
+      planeStore,
       close,
     };
-  },
-  data () {
-    return {
-      columns: [
-        { name: 'airline', required: true, label: 'Airline', align: 'center', field: row => planes.hex, sortable: false },
-        { name: 'fn', required: true, label: 'FN', align: 'left', field: row => row.aircraftInfo.callsign, sortable: false },
-        { name: 'reg', required: true, label: 'Reg', align: 'left', field: row => row.aircraftInfo.registration, sortable: false },
-        { name: 'type', required: true, label: 'Type', align: 'left', field: row => row.aircraftInfo.type, sortable: false },
-        { name: 'speed', required: true, label: 'Speed', align: 'left', field: row => row.flight.ground_speed, sortable: false },
-        { name: 'alt', required: true, label: 'Alt', align: 'left', field: row => row.flight.geometric_alt, sortable: false },
-      ],
-    }
   },
 };
 </script>
@@ -69,4 +71,24 @@ export default {
 .map-card {
   width: 100%;
 }
+
+</style>
+
+<style lang="sass">
+.my-sticky-header-table
+  height: 870px
+
+  .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th
+    background-color: #000
+
+  thead tr th
+    position: sticky
+    z-index: 1
+  thead tr:first-child th
+    top: 0
+
+  &.q-table--loading thead tr:last-child th
+    top: 48px
 </style>

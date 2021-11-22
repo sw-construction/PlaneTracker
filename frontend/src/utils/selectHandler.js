@@ -18,10 +18,7 @@ export const addSelectClick = () => {
   map.addInteraction(select);
   select.on("select", async function (e) {
     // this is for something else
-    if (selectedAC) {
-      //   selectedAC.setTrailVisible(false);
-      //   selectedAC = null;
-    }
+
     let hex = e.selected[0]?.hex;
     aircraftSelection(hex, false);
   });
@@ -32,13 +29,13 @@ export const aircraftSelection = (hex, fromTable) => {
   if (hex) {
     // TODO: add handlers to open panel
     let aircraft = getPlaneFromPlanes(hex);
-    if (previousAircraft) {
-      previousAircraft.toggleTrail();
-    } else {
-      previousAircraft = aircraft;
-    }
+    // if (previousAircraft) {
+    //   previousAircraft.toggleTrail();
+    // } else {
+    //   previousAircraft = aircraft;
+    // }
 
-    aircraft.toggleTrail();
+    // aircraft.toggleTrail();
     planeStore.state.aircraft = aircraft;
     planeStore.state.selectedAircraft[0] = aircraft;
     console.log(aircraft);
@@ -50,7 +47,7 @@ export const aircraftSelection = (hex, fromTable) => {
   } else {
     planeStore.state.showAircraftPanel = false;
     planeStore.state.aircraft = null;
-    previousAircraft.toggleTrail();
+    // previousAircraft.toggleTrail();
     planeStore.state.selectedAircraft = [];
   }
 };

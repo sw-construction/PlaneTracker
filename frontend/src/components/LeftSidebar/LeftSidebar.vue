@@ -19,7 +19,6 @@ export default {
     AircraftPanel,
   },
   setup() {
-
     return {
       planeStore,
     };
@@ -30,5 +29,7 @@ export default {
 .left-sidebar {
   position: absolute;
   z-index: 2;
+  overflow: auto;
+  height: 100%;
 }
 </style>

@@ -21,10 +21,10 @@
             @click="openAircraftList"
           >
             <div id="icon-container">
-              <q-icon name="print" size="md"> </q-icon>
+              <q-icon name="list" size="md"> </q-icon>
             </div>
             <div id="label-container">
-              <label> Aircraft List</label>
+              <label> Aircraft Feed</label>
             </div>
           </button>
           <button
@@ -33,22 +33,10 @@
             @click="openAircraftTable"
           >
             <div id="icon-container">
-              <q-icon name="print" size="md"> </q-icon>
+              <q-icon name="table_chart" size="md"> </q-icon>
             </div>
             <div id="label-container">
               <label> Aircraft Table</label>
-            </div>
-          </button>
-          <button
-            ref="AircraftFilter"
-            class="sidebar-button"
-            @click="openAircraftFilter"
-          >
-            <div id="icon-container">
-              <q-icon name="print" size="md"> </q-icon>
-            </div>
-            <div id="label-container">
-              <label> Filters</label>
             </div>
           </button>
         </div>
@@ -84,7 +72,7 @@ export default {
       mapOptions.value.classList.add("selected");
       aircraftList.value.classList.remove("selected");
       aircraftTable.value.classList.remove("selected");
-      AircraftFilter.value.classList.remove("selected");
+      // AircraftFilter.value.classList.remove("selected");
       openSideBar();
     };
     const openAircraftList = () => {
@@ -92,7 +80,7 @@ export default {
       aircraftList.value.classList.add("selected");
       mapOptions.value.classList.remove("selected");
       aircraftTable.value.classList.remove("selected");
-      AircraftFilter.value.classList.remove("selected");
+      // AircraftFilter.value.classList.remove("selected");
       openSideBar();
     };
     const openAircraftTable = () => {
@@ -100,13 +88,13 @@ export default {
       aircraftTable.value.classList.add("selected");
       mapOptions.value.classList.remove("selected");
       aircraftList.value.classList.remove("selected");
-      AircraftFilter.value.classList.remove("selected");
+      // AircraftFilter.value.classList.remove("selected");
 
       openSideBar();
     };
     const openAircraftFilter = () => {
       currentPanel.value = Filter;
-      AircraftFilter.value.classList.add("selected");
+      // AircraftFilter.value.classList.add("selected");
       aircraftTable.value.classList.remove("selected");
       mapOptions.value.classList.remove("selected");
       aircraftList.value.classList.remove("selected");

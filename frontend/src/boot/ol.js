@@ -11,12 +11,13 @@ import * as olProj from "ol/proj";
 // "export default () => {}" function below (which runs individually
 // for each client)
 
+let layers = [];
 const map = new Map({
   view: new View({
     projection: "EPSG:3857",
     center: olProj.transform([-106.485, 31.7619], "EPSG:4326", "EPSG:3857"),
     zoom: 11,
-    layers: [],
+    layers: layers,
   }),
 });
 
@@ -34,4 +35,4 @@ export default boot(({ app }) => {
   //       so you can easily perform requests against your app's API
 });
 
-export { map, planeSource, trailSource };
+export { map, planeSource, trailSource, layers };

@@ -4,6 +4,7 @@ import { map } from "boot/ol";
 import Point from "ol/geom/Point";
 import Stroke from "ol/style/Stroke";
 import Style from "ol/style/Style";
+import planeStore from "src/planeStore";
 
 // This layers holds the source for the aircrafts.
 let planeLayer = new VectorLayer({
@@ -22,3 +23,6 @@ let planeTrails = new VectorLayer({
 
 map.addLayer(planeLayer);
 map.addLayer(planeTrails);
+
+planeStore.state.tracks.push(planeLayer);
+planeStore.state.tracks.push(planeTrails);

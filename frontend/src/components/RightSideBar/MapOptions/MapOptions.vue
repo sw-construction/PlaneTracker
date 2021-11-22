@@ -11,7 +11,7 @@
           <q-card-section>
             <div class="row">
               <div class="text-h6">Base Maps</div>
-              <!-- <MapList /> -->
+              <BaseMapList />
             </div>
           </q-card-section>
         </q-card>
@@ -40,12 +40,12 @@
 </template>
 
 <script>
-// import MapList from "./MapOptions/MapList.vue";
+import BaseMapList from "src/components/RightSideBar/MapOptions/BaseMapList.vue";
 // import MapOverlayList from "./MapOptions/MapOverlayList.vue";
 // import AircraftSettings from "./MapOptions/AircraftSettings.vue";
 export default {
   components: {
-    // MapList,
+    BaseMapList,
     // MapOverlayList,
     // AircraftSettings,
   },

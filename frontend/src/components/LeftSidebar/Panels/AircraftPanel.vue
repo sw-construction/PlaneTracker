@@ -13,329 +13,345 @@
             <q-btn flat round color="accent" icon="close" @click="close" />
           </q-card-actions>
         </q-item>
-        <q-img width="360px" height="240px" :src="aircraft.photo.photo_url" />
-        <div v-if="aircraft.photo.photo_link">
-          <a
-            :href="aircraft.photo.photo_link"
-            target="_blank"
-            style="text-decoration: none !important; color: white"
-            >Link to photo</a
-          >
+
+        <!-- ------------------------ -->
+        <div class="content-container">
+          <q-img width="360px" height="240px" :src="aircraft.photo.photo_url" />
+          <div v-if="aircraft.photo.photo_link">
+            <a
+              :href="aircraft.photo.photo_link"
+              target="_blank"
+              style="text-decoration: none !important; color: white"
+              >Link to photo</a
+            >
+          </div>
+
+          <q-item class="q-px-none q-pb-none">
+            <q-item-section>
+              <q-item-label class="text-center q-pb-xs">
+                Aircraft Information
+              </q-item-label>
+              <div class="row data-row">
+                <div class="col icon-col">
+                  <q-icon size="32px" class="las la-plane" />
+                </div>
+                <div class="col">
+                  <div class="col data-col">
+                    <div class="text-h6">Aircraft Type</div>
+                    <q-item-label
+                      class="text-subtitle2"
+                      v-if="aircraft.aircraftInfo.type"
+                      >{{ aircraft.aircraftInfo.type }}</q-item-label
+                    >
+                    <q-item-label class="text-subtitle2" v-else
+                      >N/A</q-item-label
+                    >
+                  </div>
+                  <q-separator class="divider" size="4px" />
+                  <div class="col data-col">
+                    <div class="text-h6">Registration</div>
+                    <q-item-label
+                      class="text-subtitle2"
+                      v-if="aircraft.aircraftData"
+                      >{{
+                        aircraft.aircraftData.registrationNumber
+                      }}</q-item-label
+                    >
+                    <q-item-label class="text-subtitle2" v-else
+                      >N/A</q-item-label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="row data-row">
+                <div class="col icon-col">
+                  <q-icon size="32px" class="las la-plane-departure" />
+                </div>
+                <div class="col">
+                  <div class="col data-col">
+                    <div class="text-h6">Altitude</div>
+                    <q-item-label
+                      class="text-subtitle2"
+                      v-if="aircraft.position.alt"
+                      >{{ aircraft.position.alt }} ft</q-item-label
+                    >
+                    <q-item-label class="text-subtitle2" v-else
+                      >N/A</q-item-label
+                    >
+                  </div>
+                  <q-separator class="divider" size="4px" />
+                  <div class="col data-col">
+                    <div class="text-h6">Vertical Speed</div>
+                    <q-item-label
+                      class="text-subtitle2"
+                      v-if="aircraft.flight.ground_speed"
+                      >{{ aircraft.flight.ground_speed }}</q-item-label
+                    >
+                    <q-item-label class="text-subtitle2" v-else
+                      >N/A</q-item-label
+                    >
+                  </div>
+                  <q-separator class="divider" size="4px" />
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">Lat</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.position.lat"
+                        >{{ aircraft.position.lat }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">Lon</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.position.lon"
+                        >{{ aircraft.position.lon }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row data-row">
+                <div class="col icon-col">
+                  <q-icon size="32px" class="las la-tachometer-alt" />
+                </div>
+                <div class="col">
+                  <div class="col data-col">
+                    <div class="text-h6">Airspeed</div>
+                    <q-item-label
+                      class="text-subtitle2"
+                      v-if="aircraft.flight.ground_speed"
+                      >{{ aircraft.flight.ground_speed }}</q-item-label
+                    >
+                    <q-item-label class="text-subtitle2" v-else
+                      >N/A</q-item-label
+                    >
+                  </div>
+                  <q-separator class="divider" size="4px" />
+                  <div class="col data-col">
+                    <div class="text-h6">Groundspeed</div>
+                    <q-item-label
+                      class="text-subtitle2"
+                      v-if="aircraft.flight.ground_speed"
+                      >{{ aircraft.flight.ground_speed }}</q-item-label
+                    >
+                    <q-item-label class="text-subtitle2" v-else
+                      >N/A</q-item-label
+                    >
+                  </div>
+                </div>
+              </div>
+            </q-item-section>
+          </q-item>
+
+          <q-item class="q-px-none q-pb-none">
+            <q-item-section>
+              <q-item-label class="text-center q-pb-xs">
+                More Information
+              </q-item-label>
+              <div class="row data-row">
+                <div class="col icon-col">
+                  <q-icon size="32px" class="las la-plane" />
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">Barometric Rate</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.barometric_rate"
+                        >{{ aircraft.flight.barometric_rate }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">Heading</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.heading"
+                        >{{ aircraft.flight.heading }} °
+                      </q-item-label>
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+                  <q-separator class="divider" size="4px" />
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">Squawk</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.squawk"
+                        >{{ aircraft.flight.squawk }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">RSSI</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.rssi"
+                        >{{ aircraft.flight.rssi }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+                  <!-- ----------------------- -->
+                  <q-separator class="divider" size="4px" />
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">Navigation QNH</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.nav_qnh"
+                        >{{ aircraft.flight.nav_qnh }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">MLAT</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.mlat"
+                        >{{ aircraft.flight.mlat }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+                  <q-separator class="divider" size="4px" />
+                  <!-- ----------------------- -->
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">Barometric Altitude</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.barometric_alt"
+                        >{{ aircraft.flight.barometric_alt }} ft</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">Geomertric Altitude</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.geometric_alt"
+                        >{{ aircraft.flight.geometric_alt }} ft</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+
+                  <!----------------------------------  -->
+                  <q-separator class="divider" size="4px" />
+
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">NIC</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.nic"
+                        >{{ aircraft.flight.nic }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">RC</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.rc"
+                        >{{ aircraft.flight.rc }}</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+                  <!-- -------------------- -->
+                  <q-separator class="divider" size="4px" />
+
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">Flight</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.aircraftInfo.callsign"
+                        >{{ aircraft.aircraftInfo.callsign }}
+                      </q-item-label>
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">Category</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.aircraftInfo.category"
+                        >{{ aircraft.aircraftInfo.category }} ft</q-item-label
+                      >
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+                  <!-- --------------------------- -->
+                  <q-separator class="divider" size="4px" />
+
+                  <div class="row">
+                    <div class="col data-col">
+                      <div class="text-h6">Last Seen</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.lastSeen"
+                        >{{ aircraft.lastSeen }} Second ago
+                      </q-item-label>
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                    <div class="col data-col">
+                      <div class="text-h6">Navigation Modes</div>
+                      <q-item-label
+                        class="text-subtitle2"
+                        v-if="aircraft.flight.modes"
+                        >{{ aircraft.flight.modes }}
+                      </q-item-label>
+                      <q-item-label class="text-subtitle2" v-else
+                        >N/A</q-item-label
+                      >
+                    </div>
+                  </div>
+                  <!-- ---------------- -->
+                </div>
+              </div>
+            </q-item-section>
+          </q-item>
         </div>
 
-        <q-item class="q-px-none q-pb-none">
-          <q-item-section>
-            <q-item-label class="text-center q-pb-xs">
-              Aircraft Information
-            </q-item-label>
-            <div class="row data-row">
-              <div class="col icon-col">
-                <q-icon size="32px" class="las la-plane" />
-              </div>
-              <div class="col">
-                <div class="col data-col">
-                  <div class="text-h6">Aircraft Type</div>
-                  <q-item-label
-                    class="text-subtitle2"
-                    v-if="aircraft.aircraftInfo.type"
-                    >{{ aircraft.aircraftInfo.type }}</q-item-label
-                  >
-                  <q-item-label class="text-subtitle2" v-else>N/A</q-item-label>
-                </div>
-                <q-separator class="divider" size="4px" />
-                <div class="col data-col">
-                  <div class="text-h6">Registration</div>
-                  <q-item-label
-                    class="text-subtitle2"
-                    v-if="aircraft.aircraftData"
-                    >{{
-                      aircraft.aircraftData.registrationNumber
-                    }}</q-item-label
-                  >
-                  <q-item-label class="text-subtitle2" v-else>N/A</q-item-label>
-                </div>
-              </div>
-            </div>
-            <div class="row data-row">
-              <div class="col icon-col">
-                <q-icon size="32px" class="las la-plane-departure" />
-              </div>
-              <div class="col">
-                <div class="col data-col">
-                  <div class="text-h6">Altitude</div>
-                  <q-item-label
-                    class="text-subtitle2"
-                    v-if="aircraft.position.alt"
-                    >{{ aircraft.position.alt }} ft</q-item-label
-                  >
-                  <q-item-label class="text-subtitle2" v-else>N/A</q-item-label>
-                </div>
-                <q-separator class="divider" size="4px" />
-                <div class="col data-col">
-                  <div class="text-h6">Vertical Speed</div>
-                  <q-item-label
-                    class="text-subtitle2"
-                    v-if="aircraft.flight.ground_speed"
-                    >{{ aircraft.flight.ground_speed }}</q-item-label
-                  >
-                  <q-item-label class="text-subtitle2" v-else>N/A</q-item-label>
-                </div>
-                <q-separator class="divider" size="4px" />
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">Lat</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.position.lat"
-                      >{{ aircraft.position.lat }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">Lon</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.position.lon"
-                      >{{ aircraft.position.lon }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row data-row">
-              <div class="col icon-col">
-                <q-icon size="32px" class="las la-tachometer-alt" />
-              </div>
-              <div class="col">
-                <div class="col data-col">
-                  <div class="text-h6">Airspeed</div>
-                  <q-item-label
-                    class="text-subtitle2"
-                    v-if="aircraft.flight.ground_speed"
-                    >{{ aircraft.flight.ground_speed }}</q-item-label
-                  >
-                  <q-item-label class="text-subtitle2" v-else>N/A</q-item-label>
-                </div>
-                <q-separator class="divider" size="4px" />
-                <div class="col data-col">
-                  <div class="text-h6">Groundspeed</div>
-                  <q-item-label
-                    class="text-subtitle2"
-                    v-if="aircraft.flight.ground_speed"
-                    >{{ aircraft.flight.ground_speed }}</q-item-label
-                  >
-                  <q-item-label class="text-subtitle2" v-else>N/A</q-item-label>
-                </div>
-              </div>
-            </div>
-          </q-item-section>
-        </q-item>
-
         <!-- -------------------------------------------------- -->
-
-        <q-item class="q-px-none q-pb-none">
-          <q-item-section>
-            <q-item-label class="text-center q-pb-xs">
-              More Information
-            </q-item-label>
-            <div class="row data-row">
-              <div class="col icon-col">
-                <q-icon size="32px" class="las la-plane" />
-              </div>
-              <div class="col">
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">Barometric Rate</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.barometric_rate"
-                      >{{ aircraft.flight.barometric_rate }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">Heading</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.heading"
-                      >{{ aircraft.flight.heading }} °
-                    </q-item-label>
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-                <q-separator class="divider" size="4px" />
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">Squawk</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.squawk"
-                      >{{ aircraft.flight.squawk }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">RSSI</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.rssi"
-                      >{{ aircraft.flight.rssi }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-                <!-- ----------------------- -->
-                <q-separator class="divider" size="4px" />
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">Navigation QNH</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.nav_qnh"
-                      >{{ aircraft.flight.nav_qnh }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">MLAT</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.mlat"
-                      >{{ aircraft.flight.mlat }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-                <q-separator class="divider" size="4px" />
-                <!-- ----------------------- -->
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">Barometric Altitude</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.barometric_alt"
-                      >{{ aircraft.flight.barometric_alt }} ft</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">Geomertric Altitude</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.geometric_alt"
-                      >{{ aircraft.flight.geometric_alt }} ft</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-
-                <!----------------------------------  -->
-                <q-separator class="divider" size="4px" />
-
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">NIC</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.nic"
-                      >{{ aircraft.flight.nic }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">RC</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.rc"
-                      >{{ aircraft.flight.rc }}</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-                <!-- -------------------- -->
-                <q-separator class="divider" size="4px" />
-
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">Flight</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.aircraftInfo.callsign"
-                      >{{ aircraft.aircraftInfo.callsign }}
-                    </q-item-label>
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">Category</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.aircraftInfo.category"
-                      >{{ aircraft.aircraftInfo.category }} ft</q-item-label
-                    >
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-                <!-- --------------------------- -->
-                <q-separator class="divider" size="4px" />
-
-                <div class="row">
-                  <div class="col data-col">
-                    <div class="text-h6">Last Seen</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.lastSeen"
-                      >{{ aircraft.lastSeen }} Second ago
-                    </q-item-label>
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                  <div class="col data-col">
-                    <div class="text-h6">Navigation Modes</div>
-                    <q-item-label
-                      class="text-subtitle2"
-                      v-if="aircraft.flight.modes"
-                      >{{ aircraft.flight.modes }}
-                    </q-item-label>
-                    <q-item-label class="text-subtitle2" v-else
-                      >N/A</q-item-label
-                    >
-                  </div>
-                </div>
-                <!-- ---------------- -->
-              </div>
-            </div>
-          </q-item-section>
-        </q-item>
       </q-card>
     </div>
     <div class="xs m-mav-panel">

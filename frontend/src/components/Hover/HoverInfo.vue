@@ -35,7 +35,7 @@
             <label> {{ aircraft.aircraftInfo.type }} </label>
           </div>
           <div class="text-subtitle1">
-            lastSeen:
+            Last Seen:
             <label> {{ aircraft.lastSeen }} </label>
           </div>
         </div>

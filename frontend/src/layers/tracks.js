@@ -23,7 +23,7 @@ let planeTrails = new VectorLayer({
   zIndex: 200,
   renderBuffer: 20,
   title: "Plane Trails",
-  image_url: require("../assets/mlat_tracks.jpg"),
+  image_url: require("../assets/trails.jpg"),
 });
 
 map.addLayer(planeLayer);

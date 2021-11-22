@@ -36,8 +36,8 @@ export const aircraftSelection = async (hex, fromTable) => {
     // }
 
     // aircraft.toggleTrail();
-    await aircraft.getAircraftPhoto();
-    await aircraft.getAircraftReg();
+    // await aircraft.getAircraftPhoto();
+    aircraft.getAircraftReg();
     planeStore.state.aircraft = aircraft;
     planeStore.state.selectedAircraft[0] = aircraft;
     console.log(aircraft);

@@ -26,6 +26,7 @@ const removeOldPlanes = (aircraftList) => {
   for (let i = 0; i < planes.value.length; i++) {
     if (!aircraftList.includes(planes.value[i].hex)) {
       planeSource.removeFeature(planes.value[i].feature);
+      trailSource.removeFeature(planes.value[i].trail);
 
       const index = planes.value.indexOf(planes.value[i], 0);
       if (index > -1) {
@@ -45,9 +46,10 @@ const processData = async (aircrafts) => {
       let ac = aircrafts[i];
       aircraft = Object.assign(new Aircraft(), ac);
       aircraft.createFeature();
-      // aircraft.getAircraftPhoto();
+      aircraft.createTrail();
+      aircraft.getAircraftPhoto();
       // aircraft.getAircraftReg();
-      await aircraft.createTrail();
+      // await aircraft.createTrail();
 
       planes.value.push(aircraft);
     }
@@ -55,7 +57,7 @@ const processData = async (aircrafts) => {
     if (aircraft) {
       aircraft.updateAircraft(aircrafts[i]);
       // we will update trail here
-      aircraft.updateTrail();
+      // aircraft.updateTrail();
 
       // updates it position
       aircraft.updateFeature();

@@ -29,7 +29,7 @@ export default {
       timer = setTimeout(() => {
         $q.loading.hide();
         timer = void 0;
-      }, 9000);
+      }, 5000);
     };
 
     onBeforeUnmount(() => {
@@ -40,7 +40,7 @@ export default {
     });
 
     onMounted(() => {
-      // showLoading();
+      showLoading();
     });
   },
 };

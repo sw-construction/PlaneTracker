@@ -9,10 +9,10 @@ let planes = ref([]);
 // this method requests all planes from the backend
 // using axios
 export const fetchPlanes = async () => {
-  let aircrafts = await api
+  await api
     .get("/aircrafts")
     .then((response) => {
-      return response.data;
+      processData(response.data);
     })
     .catch((err) => {
       console.log(err);
@@ -20,8 +20,6 @@ export const fetchPlanes = async () => {
       // failed to fetch data
       console.log("failed to fetch data");
     });
-
-  processData(aircrafts);
 };
 
 const removeOldPlanes = (aircraftList) => {
@@ -37,7 +35,7 @@ const removeOldPlanes = (aircraftList) => {
   }
 };
 
-const processData = (aircrafts) => {
+const processData = async (aircrafts) => {
   for (let i = 0; i < aircrafts.length; i++) {
     let hex = aircrafts[i].hex;
 
@@ -47,16 +45,17 @@ const processData = (aircrafts) => {
       let ac = aircrafts[i];
       aircraft = Object.assign(new Aircraft(), ac);
       aircraft.createFeature();
-      aircraft.createTrail();
-      aircraft.getAircraftPhoto();
-      aircraft.getAircraftReg();
+      // aircraft.getAircraftPhoto();
+      // aircraft.getAircraftReg();
+      await aircraft.createTrail();
+
       planes.value.push(aircraft);
     }
 
     if (aircraft) {
       aircraft.updateAircraft(aircrafts[i]);
       // we will update trail here
-      // aircraft.updateTrail();
+      aircraft.updateTrail();
 
       // updates it position
       aircraft.updateFeature();

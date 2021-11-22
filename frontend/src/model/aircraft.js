@@ -39,7 +39,7 @@ export default class Aircraft {
       .then((response) => {
         this.trail = createTrail(response.data);
 
-        // trailSource.addFeature(this.trail);
+        trailSource.addFeature(this.trail);
       });
   }
 

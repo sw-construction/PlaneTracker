@@ -18,7 +18,7 @@ import { fetchPlanes, getPlaneFromPlanes } from "../../service/planeService";
 import HoverInfo from "../../components/Hover/HoverInfo.vue";
 import planeStore from "src/planeStore";
 import "ol/ol.css";
-import LeftSidebar from "../../components/LeftSidebar/LeftSidebar.vue"
+import LeftSidebar from "../../components/LeftSidebar/LeftSidebar.vue";
 import { addSelectClick } from "../../utils/selectHandler.js";
 
 export default {

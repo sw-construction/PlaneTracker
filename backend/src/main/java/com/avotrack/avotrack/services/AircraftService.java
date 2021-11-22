@@ -42,9 +42,7 @@ public class AircraftService {
 //        updateOldAircrafts();
 //    }
 
-    public void saveAircraft() {
-        aircraftRepo.saveAll(Global.aircrafts);
-    }
+
 
 
 
@@ -87,7 +85,8 @@ public class AircraftService {
                 } else {
                     Global.aircrafts.add(aircraft);
 
-                    aircraftRepo.save(aircraft);
+                    // Insert into the database but is too slow for live data.
+//                    aircraftRepo.save(aircraft);
                 }
             }
         }

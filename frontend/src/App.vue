@@ -9,6 +9,8 @@ import baseMap from "./layers/baseMaps";
 // runs the code in tracks.js
 import tracks from "./layers/tracks";
 
+import mapOverlays from "./layers/mapOverlays";
+
 export default defineComponent({
   name: "App",
 });

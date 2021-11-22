@@ -11,10 +11,12 @@
           <div id="basemap-thumbnail-container">
             <q-img
               id="basemap-thumbnail"
-              src="https://cdn.quasar.dev/img/parallax2.jpg"
+              width="156px"
+              height="104px"
+              :src="baseMap.get('image_url')"
             >
             </q-img>
-            <label for="">{{ baseMap.get("title") }}</label>
+            <label class="text-subtitle2">{{ baseMap.get("title") }}</label>
           </div>
         </li>
       </ul>
@@ -35,22 +37,13 @@ export default {
         .getLayers()
         .getArray()
         .forEach((baseLayer) => {
-          console.log(baseLayer);
+          if (baseLayer.get("title") == baseMap.get("title")) {
+            baseLayer.setVisible(true);
+            selectedBaseMap.value = baseMap.get("title");
+          } else {
+            baseLayer.setVisible(false);
+          }
         });
-      // console.log("das");
-      // map
-      //   .getLayers()
-      //   .getArray()
-      //   .forEach((map) => {
-      //     console.log(map.get("title"));
-      //     console.log(baseMap.get("title"));
-      //     if (baseMap.get("title") === map.get("title")) {
-      //       map.setVisible(true);
-      //       selectedBaseMap.value = baseMap.get("title");
-      //     } else {
-      //       map.visible = false;
-      //     }
-      //   });
     };
     onMounted(() => {
       // console.log(map.getLayers());
@@ -67,6 +60,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ul {
+  list-style: none;
+  margin: 0;
+}
+
 #basemap-selector {
   width: 100%;
   height: 100%;
@@ -92,6 +90,11 @@ export default {
   max-width: 50%;
   margin-bottom: 10px;
   padding-right: 15px;
+}
+
+#basemap-thumbnail {
+  width: 120px;
+  height: 120px;
 }
 
 .active > #basemap-thumbnail-container > #basemap-thumbnail {

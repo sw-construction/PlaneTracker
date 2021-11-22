@@ -15,12 +15,20 @@
             </div>
           </q-card-section>
         </q-card>
+        <q-card class="map-card bg-primary text-white" flat square>
+          <q-card-section>
+            <div class="row">
+              <div class="text-h6">Map Tracks</div>
+              <MapTrackList />
+            </div>
+          </q-card-section>
+        </q-card>
 
         <q-card class="map-card bg-primary text-white" flat square>
           <q-card-section>
             <div class="row">
               <div class="text-h6">Map Overlays</div>
-              <!-- <MapOverlayList /> -->
+              <MapOverlayList />
             </div>
           </q-card-section>
         </q-card>
@@ -41,12 +49,15 @@
 
 <script>
 import BaseMapList from "src/components/RightSideBar/MapOptions/BaseMapList.vue";
+import MapOverlayList from "src/components/RightSideBar/MapOptions/MapOverlayerList.vue";
+import MapTrackList from "src/components/RightSideBar/MapOptions/TrackList.vue";
 // import MapOverlayList from "./MapOptions/MapOverlayList.vue";
 // import AircraftSettings from "./MapOptions/AircraftSettings.vue";
 export default {
   components: {
     BaseMapList,
-    // MapOverlayList,
+    MapOverlayList,
+    MapTrackList,
     // AircraftSettings,
   },
   setup(props, { emit }) {

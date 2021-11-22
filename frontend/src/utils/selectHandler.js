@@ -24,7 +24,7 @@ export const addSelectClick = () => {
   });
 };
 
-export const aircraftSelection = (hex, fromTable) => {
+export const aircraftSelection = async (hex, fromTable) => {
   console.log(hex);
   if (hex) {
     // TODO: add handlers to open panel
@@ -36,6 +36,8 @@ export const aircraftSelection = (hex, fromTable) => {
     // }
 
     // aircraft.toggleTrail();
+    await aircraft.getAircraftPhoto();
+    await aircraft.getAircraftReg();
     planeStore.state.aircraft = aircraft;
     planeStore.state.selectedAircraft[0] = aircraft;
     console.log(aircraft);

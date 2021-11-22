@@ -40,7 +40,7 @@ export default {
     });
 
     onMounted(() => {
-      showLoading();
+      // showLoading();
     });
   },
 };

@@ -5,7 +5,7 @@ const state = reactive({
   showAircraftPanel: false,
   selectedAircraft: [],
   baseMaps: [],
-  overlayerLayers: [],
+  overlays: [],
   tracks: [],
 });
 

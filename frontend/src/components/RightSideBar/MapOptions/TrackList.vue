@@ -3,20 +3,20 @@
     <div class="basemap-list">
       <ul>
         <li
-          v-for="(overlay, index) in planeStore.state.overlays"
+          v-for="(track, index) in planeStore.state.tracks"
           :key="index"
-          @click="toggleOverlay(overlay)"
-          :class="{ active: selectedOverlays.includes(overlay.get('title')) }"
+          @click="toggleTrack(track)"
+          :class="{ active: selectedTracks.includes(track.get('title')) }"
         >
           <div id="basemap-thumbnail-container">
             <q-img
               id="basemap-thumbnail"
               width="156px"
               height="104px"
-              :src="overlay.get('image_url')"
+              :src="track.get('image_url')"
             >
             </q-img>
-            <label class="text-subtitle2">{{ overlay.get("title") }}</label>
+            <label class="text-subtitle2">{{ track.get("title") }}</label>
           </div>
         </li>
       </ul>
@@ -31,36 +31,34 @@ import { onMounted, ref } from "vue";
 import planeStore from "src/planeStore";
 export default {
   setup() {
-    let selectedOverlays = ref([]);
-    const toggleOverlay = (overlay) => {
+    let selectedTracks = ref([]);
+    const toggleTrack = (track) => {
       map
         .getLayers()
         .getArray()
-        .forEach((overlayLayer) => {
-          if (overlayLayer.get("title") == overlay.get("title")) {
-            if (selectedOverlays.value.includes(overlayLayer.get("title"))) {
-              let index = selectedOverlays.value.indexOf(
-                overlayLayer.get("title")
-              );
-              selectedOverlays.value.splice(index, 1);
-              overlayLayer.setVisible(false);
+        .forEach((trackLayer) => {
+          if (trackLayer.get("title") == track.get("title")) {
+            if (selectedTracks.value.includes(trackLayer.get("title"))) {
+              let index = selectedTracks.value.indexOf(trackLayer.get("title"));
+              selectedTracks.value.splice(index, 1);
+              trackLayer.setVisible(false);
             } else {
-              overlayLayer.setVisible(true);
+              trackLayer.setVisible(true);
 
-              selectedOverlays.value.push(overlayLayer.get("title"));
+              selectedTracks.value.push(trackLayer.get("title"));
             }
           }
         });
     };
     onMounted(() => {
       // console.log(map.getLayers());
-      console.log(planeStore.state.baseMaps[0]);
+      selectedTracks.value.push(planeStore.state.tracks[0].get("title"));
     });
 
     return {
       planeStore,
-      toggleOverlay,
-      selectedOverlays,
+      toggleTrack,
+      selectedTracks,
     };
   },
 };

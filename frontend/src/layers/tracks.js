@@ -12,13 +12,18 @@ let planeLayer = new VectorLayer({
   declutter: false,
   zIndex: 200,
   renderBuffer: 20,
+  title: "Plane Track",
+  image_url: require("../assets/mlat_tracks.jpg"),
 });
 
 let planeTrails = new VectorLayer({
   source: trailSource,
   declutter: false,
+  visible: false,
   zIndex: 200,
   renderBuffer: 20,
+  title: "Plane Trails",
+  image_url: require("../assets/mlat_tracks.jpg"),
 });
 
 map.addLayer(planeLayer);

@@ -26,7 +26,7 @@ const removeOldPlanes = (aircraftList) => {
   for (let i = 0; i < planes.value.length; i++) {
     if (!aircraftList.includes(planes.value[i].hex)) {
       planeSource.removeFeature(planes.value[i].feature);
-      trailSource.removeFeature(planes.value[i].trail);
+      // trailSource.removeFeature(planes.value[i].trail);
 
       const index = planes.value.indexOf(planes.value[i], 0);
       if (index > -1) {

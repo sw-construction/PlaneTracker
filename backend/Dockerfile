@@ -16,6 +16,7 @@ FROM openjdk:16.0.2-jdk-slim
 
 WORKDIR /usr/src/app
 
+EXPOSE 8081
 
 COPY --from=maven_build /usr/src/app/target/avotrack.jar ./app.jar
 

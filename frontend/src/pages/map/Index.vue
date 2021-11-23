@@ -22,7 +22,7 @@ export default {
         spinnerColor: "accent",
         spinnerSize: 140,
         backgroundColor: "black",
-        message: "Getting everythinhg ready. Hang on...",
+        message: "Getting everything ready. Hang on...",
         messageColor: "white",
         customClass: "bg-primary",
       });

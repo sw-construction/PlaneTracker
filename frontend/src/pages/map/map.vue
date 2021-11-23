@@ -13,7 +13,7 @@
 <script>
 import ol, { map } from "../../boot/ol";
 import { ref, onMounted, onUnmounted } from "vue";
-import RightSidebar from "../../components/RightSidebar/Rightsidebar.vue";
+import RightSidebar from "src/components/RightSideBar/RightSidebar.vue";
 import { fetchPlanes, getPlaneFromPlanes } from "../../service/planeService";
 import HoverInfo from "../../components/Hover/HoverInfo.vue";
 import planeStore from "src/planeStore";

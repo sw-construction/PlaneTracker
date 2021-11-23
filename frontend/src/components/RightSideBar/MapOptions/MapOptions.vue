@@ -32,14 +32,6 @@
             </div>
           </q-card-section>
         </q-card>
-        <q-card class="map-card bg-primary text-white" flat square>
-          <q-card-section>
-            <div class="row">
-              <div class="text-h6">Aircraft Settings</div>
-              <!-- <AircraftSettings /> -->
-            </div>
-          </q-card-section>
-        </q-card>
       </div>
     </div>
     <br />
@@ -88,6 +80,7 @@ export default {
 #tab-content {
   height: 100%;
   background-color: $primary;
+  overflow: auto;
 }
 #tab-label {
   background-color: $accent;

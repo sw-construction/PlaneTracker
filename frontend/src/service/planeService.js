@@ -57,7 +57,7 @@ const processData = async (aircrafts) => {
     if (aircraft) {
       aircraft.updateAircraft(aircrafts[i]);
       // we will update trail here
-      aircraft.updateTrail();
+      // aircraft.updateTrail();
 
       // updates it position
       aircraft.updateFeature();

@@ -44,7 +44,7 @@ module.exports = configure(function (ctx) {
     build: {
       vueRouterMode: "hash", // available values: 'hash', 'history'
       env: {
-        plane_url: ctx.dev ? "http://127.0.0.1:8081" : "",
+        plane_url: ctx.dev ? "http://127.0.0.1:8081" : "54.162.46.215:8181",
       },
 
       // transpile: false,
